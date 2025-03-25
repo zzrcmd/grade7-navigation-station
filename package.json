@@ -1,14 +1,14 @@
-{
-      "name": "grade-7-navigation-station",
-        "version": "1.0.0",
-          "description": "Cloudflare Workers 项目",
-            "main": "index.js",
-              "scripts": {
-                  "start": "wrangler dev",
-                      "deploy": "wrangler deploy"
-                        },
-                          "devDependencies": {
-                              "wrangler": "^4.4.0"
-                                }
-                                }
+{"name": "grade-7-navigation-station",
+"version": "1.0.0",
+"description": "Cloudflare Workers 项目",
+"main": "index.js",
+"scripts": {
+"build": "tsc",
+"start": "wrangler dev",
+"deploy": "wrangler deploy"
+},
+"devDependencies": {
+"wrangler": "^4.4.0"
+}
+}
 
