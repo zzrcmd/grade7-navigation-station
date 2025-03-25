@@ -5,3 +5,7 @@ compatibility_date = "2025-03-25"
 
 [site]
 bucket = "./public"
+
+[site.cache_control]
+public = "max-age=31536000, immutable"
+index.html = "max-age=0, must-revalidate"
