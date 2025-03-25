@@ -1,15 +1,25 @@
-const http = require('http');
+addEventListener('fetch', event => {
+        event.respondWith(handleRequest(event.request));
+        });
 
-// 创建 HTTP 服务器
-const server = http.createServer((req, res) => {
-    // 设置响应头
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    // 发送响应内容
-    res.end('Hello, World!\n');
-});
+        async function handleRequest(request) {
+            const url = new URL(request.url);
+                const path = url.pathname;
 
-// 监听端口
-const port = 3000;
-server.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}/`);
-});    
+                    switch (path) {
+                            case '/':
+                                        return new Response('Welcome to the home page!', {
+                                                        headers: { 'content-type': 'text/plain' },
+                                                                    });
+                                                                            case '/about':
+                                                                                        return new Response('This is the about page.', {
+                                                                                                        headers: { 'content-type': 'text/plain' },
+                                                                                                                    });
+                                                                                                                            default:
+                                                                                                                                        return new Response('404 Not Found', {
+                                                                                                                                                        status: 404,
+                                                                                                                                                                        headers: { 'content-type': 'text/plain' },
+                                                                                                                                                                                    });
+                                                                                                                                                                                        }
+                                                                                                                                                                                        }
+})

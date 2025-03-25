@@ -2,7 +2,9 @@ name = "grade-7-navigation-station"
 workers_dev = true
 main = "index.js"
 compatibility_date = "2025-03-25"
-nodejs_compat = true
 
 [site]
 bucket = "./public"
+
+[build.upload]
+nodejs_compat = true
