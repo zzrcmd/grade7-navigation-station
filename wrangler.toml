@@ -1,4 +1,4 @@
-name = "grade-name = "grade-7-navigation-station"
+name = "grade-7-navigation-station"
 workers_dev = true
 main = "index.js"
 compatibility_date = "2025-03-25"
