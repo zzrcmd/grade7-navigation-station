@@ -1,0 +1,10 @@
+name = "grade-7-navigation-station"
+workers_dev = true
+main = "index.js"
+
+[site]
+bucket = "./public"
+
+[site.cache_control]
+public = "max-age=31536000, immutable"
+index.html = "max-age=0, must-revalidate"
