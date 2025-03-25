@@ -1,3 +1,6 @@
+# 拉取远程分区
+git pull origin main
+
 # 添加所有更改到暂存区
 git add -A
 
