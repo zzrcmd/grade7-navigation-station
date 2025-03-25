@@ -5,6 +5,3 @@ compatibility_date = "2025-03-25"
 
 [site]
 bucket = "./public"
-
-[build.upload]
-nodejs_compat = true
