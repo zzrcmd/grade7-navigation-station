@@ -18,6 +18,12 @@ jobs:
         with:
           node-version: 18
 
+      - name: Install dependencies
+         run: npm install
+
+      - name: Compile TypeScript
+        run: npx tsc
+
       - name: Install wrangler
         run: npm install -g wrangler
 
