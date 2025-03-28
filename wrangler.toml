@@ -1,1 +1,4 @@
+name = "grade7-navigation-station"
+compatibility_date = "2025-03-28"
+main = "index.js"
 nodejs_compat = true
