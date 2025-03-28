@@ -1,16 +1,9 @@
-const http = require('http');
+addEventListener('fetch', event => {
+  event.respondWith(handleRequest(event.request));
+});
 
-// 创建 HTTP 服务器
-const server = http.createServer((req, res) => {
-    // 设置响应头
-        res.writeHead(200, { 'Content-Type': 'text/plain' });
-            // 发送响应内容
-                res.end('Hello, World!\n');
-                });
-
-                // 监听端口
-                const port = 3000;
-                server.listen(port, () => {
-                    console.log(`Server running at http://localhost:${port}/`);
-                    });    
-                    // 检查这里是否有多余的括号或者括号不匹配的情况
+async function handleRequest(request) {
+  return new Response('Hello, World!', {
+    headers: { 'content-type': 'text/plain' },
+  });
+}
