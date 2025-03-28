@@ -26,6 +26,7 @@ jobs:
 
       - name: 部署到 Cloudflare Workers
         env:
+          NODE_OPTIONS: --max-old-space-size=4096  # 增加 Node.js 的内存限制
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
