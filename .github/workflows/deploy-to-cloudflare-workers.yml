@@ -31,3 +31,5 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: grade7-navigation-station
           directory: .
+
+          
