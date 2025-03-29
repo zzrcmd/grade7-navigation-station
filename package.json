@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm start",
-    "build": "echo 'No build required' || true"
+    "build": "npm build"
   },
   "devDependencies": {
     "wrangler": "^4.4.0"
