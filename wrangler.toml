@@ -4,5 +4,4 @@ main = "index.js"
 nodejs_compat = true
 
 # 添加 Cloudflare Pages 相关配置
-[pages]
 pages_build_output_dir = "."  # 这里假设你的静态文件在项目根目录，可按需修改
