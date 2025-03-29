@@ -1,34 +1,32 @@
-# name: Deploy to Cloudflare Pages
-# 
-# on:
-#   push:
-#     branches:
-#       - main  # 当 main 分支有推送时触发部署
-# 
-# jobs:
-#   deploy:
-#     runs-on: ubuntu-latest
-# 
-#     steps:
-#       - name: 检查代码
-#         uses: actions/checkout@v3
-# 
-#       - name: 安装 Node.js
-#         uses: actions/setup-node@v3
-#         with:
-#           node-version: 18
-# 
-#       - name: 安装依赖
-#         run: npm install
-# 
-#       - name: 构建项目（如果需要）
-#         run: npm run build
-# 
-#       - name: 部署到 Cloudflare Pages
-#         uses: cloudflare/pages-action@v1
-#         with:
-#           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}  # 修改为 apiToken
-#           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}  # 修改为 accountId
-#           projectName: grade-7-navigation-station  # 修改为 projectName
-#           directory: .
-#           wranglerVersion: 2
+name: 部署到 Cloudflare Pages
+
+on:
+  push:
+    branches:
+      - main  # 当 main 分支有推送时触发部署
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 检查代码
+        uses: actions/checkout@v3
+
+      - name: 安装 Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: 安装 dependencies
+        run: npm install
+
+      - name: 安装 wrangler
+        run: npm install -g wrangler
+
+      - name: 部署到 Cloudflare Pages
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          wrangler pages deploy .
