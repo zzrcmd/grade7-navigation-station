@@ -24,23 +24,6 @@ jobs:
       - name: 安装 wrangler
         run: npm install -g wrangler
 
-      - name: 检查 Cloudflare Pages 项目是否存在
-        id: check_project
-        uses: cloudflare/pages-action@v1
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: grade7-navigation-station
-          directory: .
-        continue-on-error: true  # 即使项目不存在也继续执行
-
-      - name: 创建 Cloudflare Pages 项目（如果不存在）
-        if: steps.check_project.outcome == 'failure'
-        env:
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: |
-          wrangler pages create grade7-navigation-station
-
       - name: 部署到 Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
