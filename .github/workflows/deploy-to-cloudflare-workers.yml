@@ -36,8 +36,10 @@ jobs:
 
       - name: 创建 Cloudflare Pages 项目（如果不存在）
         if: steps.check_project.outcome == 'failure'
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          wrangler pages create grade7-navigation-station --account-id ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wrangler pages create grade7-navigation-station
 
       - name: 部署到 Cloudflare Pages
         uses: cloudflare/pages-action@v1
