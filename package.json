@@ -4,8 +4,8 @@
   "description": "Cloudflare Pages 项目",
   "main": "index.js",
   "scripts": {
-    "start": "npm start",  // 如果需要本地启动项目的命令
-    "build": "echo 'No build required' || true"  // 如果不需要构建，这里可留空或简单提示
+    "start": "npm start",
+    "build": "echo 'No build required' || true"
   },
   "devDependencies": {
     "wrangler": "^4.4.0"
