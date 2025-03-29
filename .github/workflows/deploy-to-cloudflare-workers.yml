@@ -1,4 +1,4 @@
-name: Deploy to Cloudflare Workers
+name: Deploy to Cloudflare Pages
 
 on:
   push:
@@ -18,16 +18,16 @@ jobs:
         with:
           node-version: 18
 
-      - name: 安装 dependencies
+      - name: 安装依赖
         run: npm install
 
-      - name: 安装 wrangler
-        run: npm install -g wrangler
+      - name: 构建项目（如果需要）
+        run: npm run build
 
-      - name: 部署到 Cloudflare Workers
-        env:
-          NODE_OPTIONS: --max-old-space-size=4096  # 增加 Node.js 的内存限制
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: |
-          wrangler deploy
+      - name: 部署到 Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          api-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          account-id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          project-name: grade-7-navigation-station  # 替换为你的 Cloudflare Pages 项目名称
+          directory: .  # 项目根目录，如果你的静态文件在其他目录，修改这里
