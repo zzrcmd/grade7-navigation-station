@@ -9,5 +9,6 @@
   },
   "devDependencies": {
     "wrangler": "^4.4.0"
+    "Nodr.js": "^18.17.1"
   }
 }
