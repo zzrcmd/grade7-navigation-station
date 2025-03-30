@@ -34,6 +34,29 @@
 
 ### ⚙️ 自动部署
 
+本项目已配置 GitHub Actions 自动部署到 Cloudflare Pages，每次推送到 main 分支时都会自动触发部署。
+
+#### Cloudflare Pages 自动部署配置
+
+1. Fork 本仓库到你的 GitHub 账号下
+2. 在 GitHub 仓库的 Settings > Secrets and variables > Actions 中添加以下密钥：
+   - `CLOUDFLARE_API_TOKEN`：你的 Cloudflare API 令牌
+   - `CLOUDFLARE_ACCOUNT_ID`：你的 Cloudflare 账户 ID
+
+获取这些密钥的步骤：
+1. 登录 [Cloudflare 控制面板](https://dash.cloudflare.com)
+2. 在右上角的个人资料菜单中找到你的账户 ID
+3. 在 "My Profile" > "API Tokens" 中创建新的 API 令牌
+   - 选择 "Create Custom Token"
+   - 确保令牌具有 `Pages:Write` 权限
+
+完成配置后：
+- 每次推送到 main 分支时都会自动触发构建和部署
+- 构建完成后，你的网站将通过 `https://grade7-navigation-station.pages.dev` 访问
+- 你也可以在 Cloudflare Pages 控制面板中自定义域名
+
+> 如果你不需要自动部署，也可以手动构建并部署：
+
 如果遇到构建环境或者打包过程出现错误，则可以采用 `Github Actions` 来进行自动构建
 
 - 在成功 `fork` 仓库后，前往 `Actions` 页面，若您是首次开启，则会出现下面的提示，点击开启
