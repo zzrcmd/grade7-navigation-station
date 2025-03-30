@@ -16,6 +16,28 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Wrangler
+        run: npm install -g wrangler
+
+      - name: Check and Create Cloudflare Pages Project
+        run: |
+          # 检查项目是否存在
+          if ! wrangler pages project list | grep -q "grade7-navigation-station"; then
+            echo "Creating new Cloudflare Pages project..."
+            wrangler pages project create grade7-navigation-station --production-branch=main
+            echo "Project created successfully"
+          else
+            echo "Project already exists"
+          fi
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
