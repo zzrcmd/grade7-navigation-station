@@ -52,7 +52,7 @@
 
 完成配置后：
 - 每次推送到 main 分支时都会自动触发构建和部署
-- 构建完成后，你的网站将通过 `https://grade7-navigation-station.pages.dev` 访问
+- 构建完成后，你的网站将通过 `https://xxxxxxxxxxxxxxxxxxxxxx.pages.dev` 访问
 - 你也可以在 Cloudflare Pages 控制面板中自定义域名
 
 > 如果你不需要自动部署，也可以手动构建并部署：
@@ -164,8 +164,19 @@ const siteIcon = {
 天气及地区获取需要 `高德开放平台` 相关 API
 
 - 前往 [高德开放平台控制台](https://console.amap.com/dev/index) 创建一个 `Web 服务` 类型的 `Key`，并将 `Key` 填入 `.env` 中的 `VITE_WEATHER_KEY` 中
+- 在 `.env` 中设置地区信息：
+  ```bash
+  VITE_WEATHER_SHENG = "广东"  # 省份
+  VITE_WEATHER_PLACE = "湛江经济技术开发区"  # 地区
+  ```
 
-也可自行更换其他方式
+天气显示格式：
+- 单天气：`xx风（风向） x级（风速描述） 天气x`
+- 转天气：`xx风（风向） x级（风速描述） 天气x转x`
+
+示例：
+- 西北风 3级 天气 阴
+- 西北风 3级 天气 阴转多云
 
 ### 音乐
 

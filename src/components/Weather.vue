@@ -1,16 +1,9 @@
 <template>
-  <div class="weather" v-if="weatherData.adCode.city && weatherData.weather.weather">
-    <span>{{ weatherData.adCode.city }}&nbsp;</span>
-    <span>{{ weatherData.weather.weather }}&nbsp;</span>
-    <span>{{ weatherData.weather.temperature }}℃</span>
-    <span class="sm-hidden">
-      &nbsp;{{
-        weatherData.weather.winddirection?.endsWith("风")
-          ? weatherData.weather.winddirection
-          : weatherData.weather.winddirection + "风"
-      }}&nbsp;
-    </span>
-    <span class="sm-hidden">{{ weatherData.weather.windpower }}&nbsp;级</span>
+  <div class="weather" v-if="weatherData.place">
+    <span>{{ weatherData.place }}&nbsp;</span>
+    <span>{{ weatherData.windDirection }}&nbsp;</span>
+    <span>{{ weatherData.windScale }}&nbsp;</span>
+    <span>天气 {{ weatherText }}</span>
   </div>
   <div class="weather" v-else>
     <span>天气数据获取失败</span>
@@ -18,97 +11,74 @@
 </template>
 
 <script setup>
-import { getAdcode, getWeather, getOtherWeather } from "@/api";
-import { Error } from "@icon-park/vue-next";
-
-// 高德开发者 Key
-const mainKey = import.meta.env.VITE_WEATHER_KEY;
+import { ref, computed, onMounted } from "vue";
+import { ElMessage } from "element-plus";
 
 // 天气数据
-const weatherData = reactive({
-  adCode: {
-    city: null, // 城市
-    adcode: null, // 城市编码
-  },
-  weather: {
-    weather: null, // 天气现象
-    temperature: null, // 实时气温
-    winddirection: null, // 风向描述
-    windpower: null, // 风力级别
-  },
+const weatherData = ref({
+  place: null,
+  windDirection: null,
+  windScale: null,
+  weather1: null,
+  weather2: null,
 });
 
-// 取出天气平均值
-const getTemperature = (min, max) => {
-  try {
-    // 计算平均值并四舍五入
-    const average = (Number(min) + Number(max)) / 2;
-    return Math.round(average);
-  } catch (error) {
-    console.error("计算温度出现错误：", error);
-    return "NaN";
+// 计算天气显示文本
+const weatherText = computed(() => {
+  if (!weatherData.value.weather1) return "";
+  if (weatherData.value.weather1 === weatherData.value.weather2) {
+    return weatherData.value.weather1;
   }
-};
+  return `${weatherData.value.weather1}转${weatherData.value.weather2}`;
+});
 
 // 获取天气数据
 const getWeatherData = async () => {
   try {
-    // 获取地理位置信息
-    if (!mainKey) {
-      console.log("未配置，使用备用天气接口");
-      const result = await getOtherWeather();
-      console.log(result);
-      const data = result.result;
-      weatherData.adCode = {
-        city: data.city.City || "未知地区",
-        // adcode: data.city.cityId,
-      };
-      weatherData.weather = {
-        weather: data.condition.day_weather,
-        temperature: getTemperature(data.condition.min_degree, data.condition.max_degree),
-        winddirection: data.condition.day_wind_direction,
-        windpower: data.condition.day_wind_power,
+    const params = new URLSearchParams({
+      id: "88888888",
+      key: "88888888",
+      sheng: import.meta.env.VITE_WEATHER_SHENG || "广东",
+      place: import.meta.env.VITE_WEATHER_PLACE || "湛江经济技术开发区",
+    });
+
+    const response = await fetch(`https://api.oioweb.cn/api/weather?${params}`);
+    const data = await response.json();
+
+    if (data.code === "200") {
+      weatherData.value = {
+        place: data.place,
+        windDirection: data.windDirection,
+        windScale: data.windScale,
+        weather1: data.weather1,
+        weather2: data.weather2,
       };
     } else {
-      // 获取 Adcode
-      const adCode = await getAdcode(mainKey);
-      console.log(adCode);
-      if (adCode.infocode !== "10000") {
-        throw "地区查询失败";
-      }
-      weatherData.adCode = {
-        city: adCode.city,
-        adcode: adCode.adcode,
-      };
-      // 获取天气信息
-      const result = await getWeather(mainKey, weatherData.adCode.adcode);
-      weatherData.weather = {
-        weather: result.lives[0].weather,
-        temperature: result.lives[0].temperature,
-        winddirection: result.lives[0].winddirection,
-        windpower: result.lives[0].windpower,
-      };
+      throw new Error(data.msg || "获取天气数据失败");
     }
   } catch (error) {
-    console.error("天气信息获取失败:" + error);
-    onError("天气信息获取失败");
+    console.error("天气信息获取失败:", error);
+    ElMessage.error("天气信息获取失败");
   }
 };
 
-// 报错信息
-const onError = (message) => {
-  ElMessage({
-    message,
-    icon: h(Error, {
-      theme: "filled",
-      fill: "#efefef",
-    }),
-  });
-  console.error(message);
-};
-
+// 每30分钟更新一次天气
 onMounted(() => {
-  // 调用获取天气
   getWeatherData();
+  setInterval(getWeatherData, 30 * 60 * 1000);
 });
 </script>
+
+<style scoped>
+.weather {
+  font-size: 1rem;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width: 768px) {
+  .weather {
+    font-size: 0.9rem;
+  }
+}
+</style>
