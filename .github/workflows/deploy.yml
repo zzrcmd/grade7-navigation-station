@@ -21,22 +21,16 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install Wrangler
-        run: npm install -g wrangler
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
 
-      - name: Check and Create Cloudflare Pages Project
-        run: |
-          # 检查项目是否存在
-          if ! wrangler pages project list | grep -q "grade7-navigation-station"; then
-            echo "Creating new Cloudflare Pages project..."
-            wrangler pages project create grade7-navigation-station --production-branch=main
-            echo "Project created successfully"
-          else
-            echo "Project already exists"
-          fi
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@v1
@@ -44,7 +38,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: grade7-navigation-station
-          directory: .
+          directory: dist
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           wranglerVersion: 2
           branch: main
