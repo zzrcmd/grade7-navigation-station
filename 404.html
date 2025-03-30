@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/images/icon/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - 初一导航站</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "HarmonyOS Sans SC", "Microsoft YaHei", sans-serif;
+        background: #000;
+        color: #fff;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        transition: opacity 0.5s;
+      }
+
+      .background::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(10px);
+      }
+
+      .container {
+        text-align: center;
+        padding: 2rem;
+        max-width: 600px;
+        animation: fadeIn 1s ease-out;
+      }
+
+      .title {
+        font-size: 8rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .message {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+        color: #fff;
+        line-height: 1.6;
+      }
+
+      .back-home {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 30px;
+        color: #fff;
+        text-decoration: none;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+      }
+
+      .back-home:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .title {
+          font-size: 6rem;
+        }
+        .message {
+          font-size: 1.2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background" id="background"></div>
+    <div class="container">
+      <h1 class="title">404</h1>
+      <p class="message">oi，别看了，这里没有你想要的东西......<br>过段时间再来看看吧！</p>
+      <a href="/" class="back-home">返回首页</a>
+    </div>
+
+    <script>
+      // 随机背景图片
+      const backgrounds = [
+        '/images/background1.jpg',
+        '/images/background2.jpg',
+        '/images/background3.jpg',
+        '/images/background4.jpg',
+        '/images/background5.jpg',
+        '/images/background6.jpg',
+        '/images/background7.jpg',
+        '/images/background8.jpg',
+        '/images/background9.jpg',
+        '/images/background10.jpg'
+      ];
+
+      const background = document.getElementById('background');
+      const randomIndex = Math.floor(Math.random() * backgrounds.length);
+      background.style.backgroundImage = `url(${backgrounds[randomIndex]})`;
+
+      // 每5分钟切换一次背景
+      setInterval(() => {
+        const newIndex = Math.floor(Math.random() * backgrounds.length);
+        background.style.opacity = '0';
+        setTimeout(() => {
+          background.style.backgroundImage = `url(${backgrounds[newIndex]})`;
+          background.style.opacity = '1';
+        }, 500);
+      }, 5 * 60 * 1000);
+    </script>
+  </body>
+</html> 
