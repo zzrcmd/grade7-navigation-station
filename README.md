@@ -1,8 +1,37 @@
-# Cloudflare Pages 自动部署示例
+# 七年级导航站
 
-这是一个简单的示例项目，展示了如何使用 GitHub Actions 自动将网站部署到 Cloudflare Pages。
+这是一个为七年级学生设计的导航网站，提供各学科学习资源的快速访问。
 
-## 设置步骤
+## 功能特点
+
+- 简洁美观的界面设计
+- 响应式布局，支持各种设备
+- 学科分类导航
+- 自动更新时间显示
+
+## 学科导航
+
+目前包含以下学科导航：
+- 语文学习
+- 数学学习
+- 英语学习
+- 物理学习
+- 化学学习
+- 生物学习
+
+## 技术栈
+
+- HTML5
+- CSS3
+- JavaScript
+- GitHub Actions
+- Cloudflare Pages
+
+## 部署说明
+
+本项目使用 GitHub Actions 自动部署到 Cloudflare Pages。
+
+### 部署步骤
 
 1. 在 Cloudflare 中创建一个新的 Pages 项目
 2. 获取以下信息：
@@ -13,18 +42,14 @@
    - `CLOUDFLARE_ACCOUNT_ID`
 4. 修改 `.github/workflows/deploy.yml` 中的 `projectName` 为你的 Cloudflare Pages 项目名称
 
-## 使用方法
-
-1. 将代码推送到 main 分支
-2. GitHub Actions 会自动触发部署
-3. 部署完成后，可以在 Cloudflare Pages 中查看你的网站
-
 ## 本地开发
 
 你可以直接在本地打开 `index.html` 文件来预览网站。
 
-## 注意事项
+## 贡献指南
 
-- 确保你的 Cloudflare API Token 有足够的权限
-- 第一次部署可能需要几分钟时间
-- 如果遇到部署问题，请检查 GitHub Actions 日志 
+欢迎提交 Issue 和 Pull Request 来帮助改进这个项目。
+
+## 许可证
+
+MIT License 
