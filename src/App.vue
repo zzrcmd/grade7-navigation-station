@@ -47,6 +47,8 @@ import Box from "@/views/Box/index.vue";
 import MoreSet from "@/views/MoreSet/index.vue";
 import cursorInit from "@/utils/cursor.js";
 import config from "@/../package.json";
+import { nextTick, onMounted, onBeforeUnmount, watch } from "vue";
+import { ElMessage } from "element-plus";
 
 const store = mainStore();
 
@@ -96,7 +98,7 @@ onMounted(() => {
       store.backgroundShow = !store.backgroundShow;
       ElMessage({
         message: `已${store.backgroundShow ? "开启" : "退出"}壁纸展示状态`,
-        grouping: true,
+        grouping: true
       });
     }
   });
@@ -109,14 +111,34 @@ onMounted(() => {
   const styleTitle1 = "font-size: 20px;font-weight: 600;color: rgb(244,167,89);";
   const styleTitle2 = "font-size:12px;color: rgb(244,167,89);";
   const styleContent = "color: rgb(30,152,255);";
-  const title1 = "2038.games";
+  const title1 = "初一导航站";
   const title2 = `
- _____ __  __  _______     ____     __
-|_   _|  \\/  |/ ____\\ \\   / /\\ \\   / /
-  | | | \\  / | (___  \\ \\_/ /  \\ \\_/ /
-  | | | |\\/| |\\___ \\  \\   /    \\   /
- _| |_| |  | |____) |  | |      | |
-|_____|_|  |_|_____/   |_|      |_|`;
+  ____     ___    _____    ___                
+ |___ \   / _ \  |___ /   ( _ )               
+   __) | | | | |   |_ \   / _ \               
+  / __/  | |_| |  ___| | | (_) |              
+ |_____|  \___/  |____/   \___/               
+                                              
+                          _                   
+  _ __ ___     __ _    __| |   ___            
+ | '_ ` _ \   / _` |  / _` |  / _ \           
+ | | | | | | | (_| | | (_| | |  __/           
+ |_| |_| |_|  \__,_|  \__,_|  \___|           
+                                              
+  ____                                        
+ | __ )   _   _                               
+ |  _ \  | | | |                              
+ | |_) | | |_| |                              
+ |____/   \__, |                              
+          |___/                               
+                                            _ 
+  ____  ____  _ __    ___   _ __ ___     __| |
+ |_  / |_  / | '__|  / __| | '_ ` _ \   / _` |
+  / /   / /  | |    | |__  | | | | | | | (_| |
+ /___| /___| |_|     \___| |_| |_| |_|  \__,_|
+                                              
+`;
+
   const content = `\n\n版本: ${config.version}\n主页: ${config.home}\nGithub: ${config.github}`;
   console.info(`%c${title1} %c${title2} %c${content}`, styleTitle1, styleTitle2, styleContent);
 });
