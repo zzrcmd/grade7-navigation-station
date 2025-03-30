@@ -23,4 +23,8 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: grade7-navigation-station
           directory: .
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }} 
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          wranglerVersion: 2
+          branch: main
+          buildCommand: ""
+          buildOutputDirectory: . 
