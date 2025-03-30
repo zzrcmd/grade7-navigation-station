@@ -8,6 +8,8 @@
 - 响应式布局，支持各种设备
 - 学科分类导航
 - 自动更新时间显示
+- 随机背景图片切换（每5分钟自动切换一次）
+- 毛玻璃效果的内容区域
 
 ## 学科导航
 
@@ -26,6 +28,22 @@
 - JavaScript
 - GitHub Actions
 - Cloudflare Pages
+
+## 项目结构
+
+```
+grade7-navigation-station/
+├── index.html          # 主页面
+├── Images/            # 背景图片目录
+│   ├── background1.jpg
+│   ├── background2.jpg
+│   ├── background3.jpg
+│   ├── background4.jpg
+│   └── background5.jpg
+└── .github/
+    └── workflows/     # GitHub Actions 配置
+        └── deploy.yml
+```
 
 ## 部署说明
 

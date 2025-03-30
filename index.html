@@ -12,18 +12,25 @@
             padding: 20px;
             line-height: 1.6;
             background-color: #f5f5f5;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            transition: background-image 0.5s ease-in-out;
         }
         .container {
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.9);
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             text-align: center;
             margin-top: 50px;
+            backdrop-filter: blur(5px);
         }
         h1 {
             color: #2c3e50;
             margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
         .nav-links {
             display: grid;
@@ -37,10 +44,13 @@
             padding: 15px 25px;
             border-radius: 5px;
             text-decoration: none;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .nav-link:hover {
             background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
         .timestamp {
             color: #7f8c8d;
@@ -64,7 +74,31 @@
         <p class="timestamp">最后更新时间：<span id="updateTime"></span></p>
     </div>
     <script>
-        document.getElementById('updateTime').textContent = new Date().toLocaleString();
+        // 更新时间的函数
+        function updateTime() {
+            document.getElementById('updateTime').textContent = new Date().toLocaleString();
+        }
+
+        // 随机背景图片的函数
+        function setRandomBackground() {
+            const images = [
+                'Images/background1.jpg',
+                'Images/background2.jpg',
+                'Images/background3.jpg',
+                'Images/background4.jpg',
+                'Images/background5.jpg'
+            ];
+            const randomImage = images[Math.floor(Math.random() * images.length)];
+            document.body.style.backgroundImage = `url('${randomImage}')`;
+        }
+
+        // 页面加载时执行
+        window.onload = function() {
+            updateTime();
+            setRandomBackground();
+            // 每5分钟更新一次背景
+            setInterval(setRandomBackground, 5 * 60 * 1000);
+        };
     </script>
 </body>
 </html> 
