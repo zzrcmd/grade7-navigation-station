@@ -53,17 +53,16 @@ export const getHitokoto = async () => {
  * 天气
  */
 
-// 获取高德地理位置信息
-export const getAdcode = async (key) => {
-  const res = await fetch(`https://restapi.amap.com/v3/ip?key=${key}`);
-  return await res.json();
-};
+// 获取天气信息
+export const getWeather = async () => {
+  const params = new URLSearchParams({
+    id: "88888888",
+    key: "88888888",
+    sheng: import.meta.env.VITE_WEATHER_SHENG || "广东",
+    place: import.meta.env.VITE_WEATHER_PLACE || "湛江经济技术开发区",
+  });
 
-// 获取高德地理天气信息
-export const getWeather = async (key, city) => {
-  const res = await fetch(
-    `https://restapi.amap.com/v3/weather/weatherInfo?key=${key}&city=${city}`,
-  );
+  const res = await fetch(`https://api.oioweb.cn/api/weather?${params}`);
   return await res.json();
 };
 

@@ -13,6 +13,7 @@
 <script setup>
 import { ref, computed, onMounted } from "vue";
 import { ElMessage } from "element-plus";
+import { getWeather } from "@/api";
 
 // 天气数据
 const weatherData = ref({
@@ -35,16 +36,7 @@ const weatherText = computed(() => {
 // 获取天气数据
 const getWeatherData = async () => {
   try {
-    const params = new URLSearchParams({
-      id: "88888888",
-      key: "88888888",
-      sheng: import.meta.env.VITE_WEATHER_SHENG || "广东",
-      place: import.meta.env.VITE_WEATHER_PLACE || "湛江经济技术开发区",
-    });
-
-    const response = await fetch(`https://api.oioweb.cn/api/weather?${params}`);
-    const data = await response.json();
-
+    const data = await getWeather();
     if (data.code === "200") {
       weatherData.value = {
         place: data.place,

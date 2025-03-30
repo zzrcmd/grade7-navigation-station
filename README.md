@@ -161,9 +161,8 @@ const siteIcon = {
 
 ### 天气
 
-天气及地区获取需要 `高德开放平台` 相关 API
+天气及地区获取需要配置地区信息
 
-- 前往 [高德开放平台控制台](https://console.amap.com/dev/index) 创建一个 `Web 服务` 类型的 `Key`，并将 `Key` 填入 `.env` 中的 `VITE_WEATHER_KEY` 中
 - 在 `.env` 中设置地区信息：
   ```bash
   VITE_WEATHER_SHENG = "广东"  # 省份
