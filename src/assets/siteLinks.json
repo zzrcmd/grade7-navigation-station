@@ -1,13 +1,8 @@
 [
   {
-    "icon": "Blog",
-    "name": "初一聊天网页",
-    "link": "http://zzr.bioc.fun:28888"
-  },
-  {
     "icon": "Cloud",
     "name": "网盘",
-    "link": "http://zzr.bioc.fun:28000"
+    "link": "http://cloud.zzrcmd.top/"
   },
   {
     "icon": "LaptopCode",
