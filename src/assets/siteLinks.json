@@ -5,6 +5,11 @@
     "link": "http://cloud.zzrcmd.top/"
   },
   {
+    "icon": "email",
+    "name": "猫爷免费邮",
+    "link": "https://mail.zzrcmd.top/"
+  },
+  {
     "icon": "LaptopCode",
     "name": "站点监测",
     "link": "https://uptimeflare-3ey.pages.dev/"
